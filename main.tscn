@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bxprxd1akupuc"]
+
+[ext_resource type="Script" uid="uid://cjookwf7v406b" path="res://MainNode.cs" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://d3l5efw5x8nl5" path="res://character_medium.tscn" id="2_0xm2m"]
+[ext_resource type="Animation" uid="uid://cd4cy4rh27ox4" path="res://model/Animations/Root_Jump.res" id="3_h2yge"]
+
+[sub_resource type="Environment" id="Environment_ig7tw"]
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_jgtf7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bvp3"]
+_data = {
+&"Root_Jump": ExtResource("3_h2yge")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jgtf7"]
+
+[node name="Main" type="Node3D" unique_id=1391108727]
+script = ExtResource("1_ig7tw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1316211578]
+environment = SubResource("Environment_ig7tw")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=55252252]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=783092672]
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D" unique_id=1753368372]
+tracker = &"left_hand"
+show_when_tracked = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftHand" unique_id=2011775216]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+mesh = SubResource("BoxMesh_jgtf7")
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D" unique_id=1164116913]
+tracker = &"right_hand"
+show_when_tracked = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightHand" unique_id=1905449399]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+mesh = SubResource("BoxMesh_lquwl")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1781212379]
+disable_mode = 2
+
+[node name="characterMedium" parent="CharacterBody3D" unique_id=93402763 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, -0.092, -0.105, -2.005)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/characterMedium" unique_id=1734504530]
+libraries/jump = SubResource("AnimationLibrary_1bvp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1474469957]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.125, -0.115, -2.275)
+shape = SubResource("BoxShape3D_jgtf7")
