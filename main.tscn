@@ -2,13 +2,42 @@
 
 [ext_resource type="Script" uid="uid://cjookwf7v406b" path="res://MainNode.cs" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://k8t50i4g2tol" path="res://XROrigin.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c20p60f0ahbgj" path="res://cube.tscn" id="3_h2yge"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qvnej"]
+
+[sub_resource type="Sky" id="Sky_pjm61"]
+sky_material = SubResource("ProceduralSkyMaterial_qvnej")
+process_mode = 3
+
+[sub_resource type="Environment" id="Environment_wjk2v"]
+background_mode = 2
+sky = SubResource("Sky_pjm61")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_o7dyt"]
+
+[sub_resource type="Compositor" id="Compositor_5ma65"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.623014, 0, 0.088183515, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+size = Vector3(0.1, 0.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(1, 1, 0.5)
+
 [node name="Main" type="Node3D" unique_id=1391108727]
 script = ExtResource("1_ig7tw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=990745480]
+environment = SubResource("Environment_wjk2v")
+camera_attributes = SubResource("CameraAttributesPractical_o7dyt")
+compositor = SubResource("Compositor_5ma65")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1919699223]
 
@@ -22,3 +51,16 @@ mesh = SubResource("BoxMesh_ig7tw")
 [node name="XROrigin3D" parent="." unique_id=455692250 instance=ExtResource("2_0xm2m")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=834558737]
+
+[node name="Table" type="MeshInstance3D" parent="." unique_id=1319510956]
+transform = Transform3D(0.39, 0, 0, 0, 0.39, 0, 0, 0, 0.39, -0.2915691, 0.22251928, -0.0053084195)
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Table" unique_id=69384923]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D" unique_id=1830492366]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="PickableObject" parent="." unique_id=1068336126 instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.93706983, 0, -0.34914196, 0, 1, 0, 0.34914196, 0, 0.93706983, -0.28591353, 0.3881824, -0.0001090616)

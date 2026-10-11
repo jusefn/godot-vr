@@ -3,11 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="1_jr1t4"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="2_gshht"]
 [ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="2_q1xvu"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_rd8py"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="4_6xr3x"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="4_rd8py"]
 [ext_resource type="Script" uid="uid://ck4yn3hxuobj7" path="res://addons/godot-xr-tools/player/player_body.gd" id="5_rd8py"]
 
 [node name="XROrigin3D" type="XROrigin3D" unique_id=455692250]
+world_scale = 0.5
 
 [node name="XRCamera3D" type="XRCamera3D" parent="." unique_id=503907268]
 
@@ -19,6 +21,8 @@ tracker = &"left_hand"
 [node name="MovementDirect" parent="leftHand" unique_id=1347239276 instance=ExtResource("2_q1xvu")]
 strafe = true
 
+[node name="FunctionPickup" parent="leftHand" unique_id=779143702 instance=ExtResource("3_rd8py")]
+
 [node name="rightHand" type="XRController3D" parent="." unique_id=1798016192]
 tracker = &"right_hand"
 
@@ -26,6 +30,8 @@ tracker = &"right_hand"
 
 [node name="MovementTurn" parent="rightHand" unique_id=1820805405 instance=ExtResource("4_rd8py")]
 turn_mode = 2
+
+[node name="FunctionPickup" parent="rightHand" unique_id=1713996947 instance=ExtResource("3_rd8py")]
 
 [node name="PlayerBody" type="CharacterBody3D" parent="." unique_id=1163117949 groups=["player_body"] instance=ExtResource("4_6xr3x")]
 process_priority = -100
